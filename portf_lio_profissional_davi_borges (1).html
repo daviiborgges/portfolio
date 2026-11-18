@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfólio profissional de Davi Borges — Graduando em Bacharelado em Ciência da Computação (4º Semestre) e Desenvolvedor de Software com foco em Python, C, C#, Lua, SQL e Desenvolvimento Web." />
+  <title>Davi Borges | Ciência da Computação &amp; Desenvolvedor</title>
+
+  <!-- Google Fonts: Outfit (Headings) & Source Sans 3 (Body) & JetBrains Mono (Code/Badges) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Outfit:wght@400;500;600;700&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ==========================================================================
+       1. DESIGN TOKENS & VARIÁVEIS CSS
+       Paleta baseada em obsidiana profunda (#0a0a0f) e acento técnico ciano (#38bdf8)
+       ========================================================================== */
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-surface: #111118;
+      --bg-surface-elevated: #161620;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(56, 189, 248, 0.35);
+
+      --text-primary: #f4f4f6;
+      --text-secondary: #a1a1aa;
+      --text-muted: #71717a;
+
+      --accent-primary: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.12);
+      --accent-glow: rgba(56, 189, 248, 0.18);
+
+      /* Cores de identidade das linguagens nos cards de projeto */
+      --lang-python: #3b82f6;
+      --lang-c-csharp: #8b5cf6;
+      --lang-lua: #06b6d4;
+      --lang-web: #f59e0b;
+
+      --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
+      --container-max: 1120px;
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --transition-smooth: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* ==========================================================================
+       2. RESET & BASE
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      /* Grade técnica sutil no topo para profundidade arquitetural sem clichês */
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.07) 0%, transparent 55%),
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 100% 100%, 64px 64px, 64px 64px;
+      background-position: top center;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font-heading);
+      color: var(--text-primary);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* ==========================================================================
+       3. NAVEGAÇÃO FIXA COM EFEITO BLUR NO SCROLL
+       ========================================================================== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid transparent;
+      transition: background-color 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
+    }
+
+    .navbar.scrolled {
+      background-color: rgba(10, 10, 15, 0.82);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom-color: var(--border-subtle);
+    }
+
+    .nav-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1.2rem;
+      letter-spacing: -0.03em;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-primary);
+    }
+
+    .brand-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--accent-primary);
+      box-shadow: 0 0 10px var(--accent-primary);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav-link {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: color 0.2s ease;
+      position: relative;
+      padding: 0.25rem 0;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--text-primary);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background-color: var(--accent-primary);
+      transition: width 0.25s ease;
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    /* Botão Menu Mobile */
+    .mobile-menu-btn {
+      display: none;
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      padding: 0.5rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+    }
+
+    /* ==========================================================================
+       4. HERO SECTION
+       ========================================================================== */
+    .hero {
+      padding: 10.5rem 0 6.5rem;
+      min-height: 88vh;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-inner {
+      max-width: 780px;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--accent-primary);
+      background-color: var(--accent-soft);
+      border: 1px solid rgba(56, 189, 248, 0.22);
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      margin-bottom: 1.75rem;
+    }
+
+    .status-pulse {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: var(--accent-primary);
+    }
+
+    .hero-title {
+      font-size: clamp(2.6rem, 5.5vw, 4.25rem);
+      font-weight: 700;
+      letter-spacing: -0.035em;
+      margin-bottom: 0.75rem;
+      color: var(--text-primary);
+    }
+
+    .hero-role {
+      font-family: var(--font-heading);
+      font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 1.75rem;
+    }
+
+    .hero-role span {
+      color: var(--accent-primary);
+    }
+
+    .hero-summary {
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      max-width: 650px;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    /* Botões */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      padding: 0.8rem 1.5rem;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-heading);
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: var(--transition-smooth);
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background-color: var(--accent-primary);
+      color: #06121e;
+      font-weight: 600;
+    }
+
+    .btn-primary:hover {
+      background-color: #7dd3fc;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px -6px var(--accent-glow);
+    }
+
+    .btn-secondary {
+      background-color: var(--bg-surface);
+      color: var(--text-primary);
+      border-color: var(--border-subtle);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--bg-surface-elevated);
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+    }
+
+    /* ==========================================================================
+       5. ESTRUTURA PADRÃO DE SEÇÕES
+       ========================================================================== */
+    .section {
+      padding: 6rem 0;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .section-header {
+      margin-bottom: 3.5rem;
+      max-width: 640px;
+    }
+
+    .section-tag {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-primary);
+      display: block;
+      margin-bottom: 0.6rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.85rem, 3.2vw, 2.4rem);
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-subtitle {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+    }
+
+    /* ==========================================================================
+       6. SOBRE MIM & COMPETÊNCIAS
+       ========================================================================== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: var(--text-secondary);
+      font-size: 1.08rem;
+      margin-bottom: 1.35rem;
+      line-height: 1.75;
+    }
+
+    .about-text p strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .skills-panel {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 2rem;
+    }
+
+    .skill-group {
+      margin-bottom: 1.75rem;
+    }
+
+    .skill-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .skill-group-title {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .skill-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+    }
+
+    .badge {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--text-primary);
+      background-color: rgba(255, 255, 255, 0.035);
+      border: 1px solid var(--border-subtle);
+      padding: 0.38rem 0.78rem;
+      border-radius: var(--radius-sm);
+      transition: var(--transition-smooth);
+    }
+
+    .badge:hover {
+      border-color: var(--border-hover);
+      background-color: var(--accent-soft);
+      color: var(--accent-primary);
+    }
+
+    /* ==========================================================================
+       7. PROJETOS (CARDS COM PERSONALIDADE POR LINGUAGEM)
+       ========================================================================== */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.75rem;
+    }
+
+    .project-card {
+      position: relative;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: var(--transition-smooth);
+      overflow: hidden;
+    }
+
+    /* Barra superior sutil que assume a cor da linguagem principal do projeto */
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: var(--card-accent, var(--accent-primary));
+      opacity: 0.45;
+      transition: opacity 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      background-color: var(--bg-surface-elevated);
+      border-color: var(--border-hover);
+      box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.75), 0 0 25px -10px var(--accent-glow);
+    }
+
+    .project-card:hover::before {
+      opacity: 1;
+    }
+
+    .project-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.35rem;
+    }
+
+    .lang-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      background-color: rgba(255, 255, 255, 0.03);
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .lang-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--card-accent, var(--accent-primary));
+    }
+
+    .project-repo-link {
+      color: var(--text-secondary);
+      padding: 0.4rem;
+      border-radius: var(--radius-sm);
+      transition: color 0.2s ease, background-color 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      font-family: var(--font-mono);
+    }
+
+    .project-repo-link:hover {
+      color: var(--accent-primary);
+      background-color: var(--accent-soft);
+    }
+
+    .project-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--text-primary);
+      transition: color 0.2s ease;
+    }
+
+    .project-card:hover .project-title {
+      color: var(--accent-primary);
+    }
+
+    .project-desc {
+      color: var(--text-secondary);
+      font-size: 0.98rem;
+      line-height: 1.65;
+      margin-bottom: 1.75rem;
+    }
+
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-top: auto;
+    }
+
+    .tech-tag {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      background-color: rgba(255, 255, 255, 0.03);
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    /* ==========================================================================
+       8. EXPERIÊNCIA PROFISSIONAL (TIMELINE VERTICAL)
+       ========================================================================== */
+    .timeline {
+      position: relative;
+      max-width: 820px;
+      padding-left: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 8px;
+      bottom: 8px;
+      left: 5px;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--accent-primary), var(--border-subtle) 85%, transparent);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-bottom: 3rem;
+    }
+
+    .timeline-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .timeline-marker {
+      position: absolute;
+      left: -2rem;
+      top: 6px;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background-color: var(--bg-primary);
+      border: 2px solid var(--accent-primary);
+      box-shadow: 0 0 0 4px var(--bg-primary);
+    }
+
+    .timeline-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .timeline-role {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .timeline-period {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--accent-primary);
+    }
+
+    .timeline-company {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 0.9rem;
+    }
+
+    .timeline-desc {
+      color: var(--text-secondary);
+      font-size: 0.98rem;
+      line-height: 1.7;
+    }
+
+    /* ==========================================================================
+       9. CONTATO & FOOTER
+       ========================================================================== */
+    .contact-section {
+      padding: 6rem 0 4rem;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .contact-box {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 3.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .contact-title {
+      font-size: clamp(1.75rem, 3vw, 2.25rem);
+      margin-bottom: 0.75rem;
+    }
+
+    .contact-text {
+      color: var(--text-secondary);
+      max-width: 580px;
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      width: 100%;
+    }
+
+    .email-copy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      background-color: var(--bg-primary);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      padding: 0.8rem 1.35rem;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .email-copy-btn:hover {
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+    }
+
+    .copy-feedback {
+      font-size: 0.78rem;
+      color: var(--accent-primary);
+      margin-left: 0.35rem;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .copy-feedback.visible {
+      opacity: 1;
+    }
+
+    .footer-bottom {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+
+    /* ==========================================================================
+       10. ANIMAÇÕES DE ENTRADA (INTERSECTION OBSERVER)
+       ========================================================================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ==========================================================================
+       11. RESPONSIVIDADE (MOBILE-FIRST & BREAKPOINTS)
+       ========================================================================== */
+    @media (max-width: 900px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .nav-links {
+        position: fixed;
+        top: 72px;
+        left: 0;
+        right: 0;
+        background-color: rgba(10, 10, 15, 0.97);
+        backdrop-filter: blur(16px);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1.5rem;
+        gap: 1.25rem;
+        border-bottom: 1px solid var(--border-subtle);
+        transform: translateY(-120%);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+      }
+
+      .nav-links.open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .mobile-menu-btn {
+        display: inline-flex;
+      }
+
+      .hero {
+        padding: 8.5rem 0 4.5rem;
+        min-height: auto;
+      }
+
+      .section {
+        padding: 4.5rem 0;
+      }
+
+      .contact-box {
+        padding: 2rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ======================================================================
+       NAVEGAÇÃO FIXA
+       ====================================================================== -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-content">
+      <a href="#inicio" class="brand" aria-label="Página inicial de Davi Borges">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span>Davi Borges</span>
+      </a>
+
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menu de navegação" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <nav class="nav-links" id="navLinks" aria-label="Navegação principal">
+        <a href="#sobre" class="nav-link">Sobre Mim</a>
+        <a href="#projetos" class="nav-link">Projetos</a>
+        <a href="#experiencia" class="nav-link">Formação &amp; Trajetória</a>
+        <a href="#contato" class="nav-link">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ====================================================================
+         1. HERO SECTION
+         [EDITÁVEL]: Atualize o título profissional e o resumo abaixo com o 
+         headline e o início do "Sobre" do seu LinkedIn.
+         ==================================================================== -->
+    <section class="hero" id="inicio">
+      <div class="container">
+        <div class="hero-inner reveal">
+          <div class="hero-eyebrow">
+            <span class="status-pulse" aria-hidden="true"></span>
+            <span>Aberto a oportunidades de Estágio &amp; Desenvolvimento Júnior</span>
+          </div>
+
+          <h1 class="hero-title">Davi Borges</h1>
+          
+          <!-- [EDITÁVEL]: Altere o curso ou título conforme seu LinkedIn -->
+          <p class="hero-role">
+            Bacharelado em Ciência da Computação (4º Semestre) <span>&amp;</span> Desenvolvedor
+          </p>
+
+          <!-- [EDITÁVEL]: Resumo de 2-3 linhas extraído/adaptado do LinkedIn -->
+          <p class="hero-summary">
+            Construo uma base sólida em programação com Python, C, C#, Lua, SQL e desenvolvimento web (HTML5, CSS3 e JavaScript), aliada aos fundamentos de Engenharia de Software, Modelagem UML, Análise de Dados, Redes, Sistemas Operacionais e Computação em Nuvem.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#projetos" class="btn btn-primary">
+              <span>Ver Projetos</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <polyline points="19 12 12 19 5 12"></polyline>
+              </svg>
+            </a>
+
+            <a href="https://www.linkedin.com/in/daviiborgges/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                <rect x="2" y="9" width="4" height="12"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
+              <span>LinkedIn</span>
+            </a>
+
+            <a href="https://github.com/DavidNeox" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+              </svg>
+              <span>GitHub</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         2. SOBRE MIM & COMPETÊNCIAS TÉCNICAS
+         [EDITÁVEL]: Substitua os parágrafos pelo texto completo do seu "Sobre"
+         no LinkedIn e ajuste as tags de tecnologias conforme sua stack.
+         ==================================================================== -->
+    <section class="section" id="sobre">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">01. Perfil Acadêmico &amp; Técnico</span>
+          <h2 class="section-title">Sobre Mim</h2>
+          <p class="section-subtitle">
+            Fundamentos sólidos em lógica de programação, estruturas de dados e desenvolvimento multiplataforma.
+          </p>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-text reveal">
+            <p>
+              Sou estudante universitário no <strong>4º semestre do Bacharelado em Ciência da Computação</strong> pela <strong>Universidade Estácio de Sá (Estácio)</strong>, focado em transformar teoria acadêmica em soluções funcionais, organizadas e eficientes. Minha formação une a prática em linguagens como <strong>Python, C, C#, Lua e SQL</strong> à compreensão estrutural de como sistemas operam, se comunicam e escalam.
+            </p>
+            <p>
+              Ao longo da graduação, venho consolidando conhecimentos essenciais em <strong>Engenharia de Software, Modelagem de Sistemas em UML e Desenvolvimento Rápido de Aplicações (RAD)</strong>, planejando arquiteturas e fluxos antes da implementação, além de atuar com <strong>Análise de Dados</strong> para extrair informações relevantes.
+            </p>
+            <p>
+              Complemento minha base técnica com o estudo de <strong>Sistemas Operacionais, Redes de Computadores e Computação em Nuvem</strong>, além do desenvolvimento de interfaces responsivas com <strong>HTML5, CSS3 e JavaScript</strong>.
+            </p>
+          </div>
+
+          <aside class="skills-panel reveal" aria-label="Competências técnicas">
+            <div class="skill-group">
+              <h3 class="skill-group-title">Linguagens &amp; Dados</h3>
+              <div class="skill-badges">
+                <span class="badge">Python</span>
+                <span class="badge">C</span>
+                <span class="badge">C#</span>
+                <span class="badge">Lua</span>
+                <span class="badge">SQL</span>
+              </div>
+            </div>
+
+            <div class="skill-group">
+              <h3 class="skill-group-title">Desenvolvimento Web &amp; RAD</h3>
+              <div class="skill-badges">
+                <span class="badge">HTML5</span>
+                <span class="badge">CSS3</span>
+                <span class="badge">JavaScript</span>
+                <span class="badge">Metodologias RAD</span>
+              </div>
+            </div>
+
+            <div class="skill-group">
+              <h3 class="skill-group-title">Engenharia &amp; Infraestrutura</h3>
+              <div class="skill-badges">
+                <span class="badge">Engenharia de Software</span>
+                <span class="badge">Modelagem UML</span>
+                <span class="badge">Análise de Dados</span>
+                <span class="badge">Redes de Computadores</span>
+                <span class="badge">Sistemas Operacionais</span>
+                <span class="badge">Computação em Nuvem</span>
+                <span class="badge">Git &amp; GitHub</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         3. PROJETOS (REPOSITÓRIOS DO GITHUB)
+         [EDITÁVEL]: Duplique ou edite cada <article class="project-card"> com
+         os nomes, descrições, links e linguagens reais de github.com/DavidNeox.
+         Dica: Mude --card-accent para var(--lang-python), var(--lang-c-csharp), 
+         var(--lang-lua) ou var(--lang-web) para dar identidade visual ao card.
+         ==================================================================== -->
+    <section class="section" id="projetos">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">02. Portfólio Prático</span>
+          <h2 class="section-title">Projetos em Destaque</h2>
+          <p class="section-subtitle">
+            Projetos acadêmicos e pessoais desenvolvidos para aplicar estruturas de dados, scripts, automação e interfaces web.
+          </p>
+        </div>
+
+        <div class="projects-grid">
+          <!-- PROJETO 1: PYTHON & ANÁLISE DE DADOS -->
+          <article class="project-card reveal" style="--card-accent: var(--lang-python);">
+            <div>
+              <div class="project-top">
+                <span class="lang-indicator">
+                  <span class="lang-dot" aria-hidden="true"></span>
+                  <span>Python</span>
+                </span>
+                <!-- [EDITÁVEL]: Adicione o slug do repositório após /DavidNeox/ -->
+                <a href="https://github.com/DavidNeox" target="_blank" rel="noopener noreferrer" class="project-repo-link" aria-label="Ver código no GitHub">
+                  <span>Repositório</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                  </svg>
+                </a>
+              </div>
+
+              <!-- [EDITÁVEL]: Título e descrição do seu repositório Python -->
+              <h3 class="project-title">Pipeline de Análise de Dados &amp; Consultas SQL</h3>
+              <p class="project-desc">
+                Aplicação desenvolvida em Python integrada a banco de dados relacional SQL para coleta, limpeza, análise exploratória de dados e geração de relatórios estruturados a partir de registros tabulares.
+              </p>
+            </div>
+
+            <div class="project-tech">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">Análise de Dados</span>
+              <span class="tech-tag">SQL</span>
+            </div>
+          </article>
+
+          <!-- PROJETO 2: C & SISTEMAS OPERACIONAIS -->
+          <article class="project-card reveal" style="--card-accent: var(--lang-c-csharp);">
+            <div>
+              <div class="project-top">
+                <span class="lang-indicator">
+                  <span class="lang-dot" aria-hidden="true"></span>
+                  <span>C</span>
+                </span>
+                <!-- [EDITÁVEL]: Adicione o slug do repositório após /DavidNeox/ -->
+                <a href="https://github.com/DavidNeox" target="_blank" rel="noopener noreferrer" class="project-repo-link" aria-label="Ver código no GitHub">
+                  <span>Repositório</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                  </svg>
+                </a>
+              </div>
+
+              <!-- [EDITÁVEL]: Título e descrição do seu repositório C -->
+              <h3 class="project-title">Simulador de Processos &amp; Estruturas em C</h3>
+              <p class="project-desc">
+                Implementação prática de gerenciamento de memória, alocação dinâmica e escalonamento inspirado em Sistemas Operacionais, aplicando algoritmos eficientes em linguagem C.
+              </p>
+            </div>
+
+            <div class="project-tech">
+              <span class="tech-tag">C</span>
+              <span class="tech-tag">Sistemas Operacionais</span>
+              <span class="tech-tag">Algoritmos</span>
+            </div>
+          </article>
+
+          <!-- PROJETO 3: C# / RAD / MODELAGEM UML -->
+          <article class="project-card reveal" style="--card-accent: var(--lang-c-csharp);">
+            <div>
+              <div class="project-top">
+                <span class="lang-indicator">
+                  <span class="lang-dot" aria-hidden="true"></span>
+                  <span>C# / RAD</span>
+                </span>
+                <!-- [EDITÁVEL]: Adicione o slug do repositório após /DavidNeox/ -->
+                <a href="https://github.com/DavidNeox" target="_blank" rel="noopener noreferrer" class="project-repo-link" aria-label="Ver código no GitHub">
+                  <span>Repositório</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                  </svg>
+                </a>
+              </div>
+
+              <!-- [EDITÁVEL]: Título e descrição do seu repositório C# / UML -->
+              <h3 class="project-title">Sistema de Gestão Modelado em UML &amp; RAD</h3>
+              <p class="project-desc">
+                Aplicação desktop desenvolvida com abordagem RAD (Rapid Application Development) em C# e persistência SQL, projetada previamente com diagramas de casos de uso e sequência em UML.
+              </p>
+            </div>
+
+            <div class="project-tech">
+              <span class="tech-tag">C#</span>
+              <span class="tech-tag">Modelagem UML</span>
+              <span class="tech-tag">RAD</span>
+              <span class="tech-tag">SQL</span>
+            </div>
+          </article>
+
+          <!-- PROJETO 4: LUA & SCRIPTING -->
+          <article class="project-card reveal" style="--card-accent: var(--lang-lua);">
+            <div>
+              <div class="project-top">
+                <span class="lang-indicator">
+                  <span class="lang-dot" aria-hidden="true"></span>
+                  <span>Lua</span>
+                </span>
+                <!-- [EDITÁVEL]: Adicione o slug do repositório após /DavidNeox/ -->
+                <a href="https://github.com/DavidNeox" target="_blank" rel="noopener noreferrer" class="project-repo-link" aria-label="Ver código no GitHub">
+                  <span>Repositório</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                  </svg>
+                </a>
+              </div>
+
+              <!-- [EDITÁVEL]: Título e descrição do seu repositório Lua -->
+              <h3 class="project-title">Módulo de Scripts, Lógica &amp; Automação em Lua</h3>
+              <p class="project-desc">
+                Desenvolvimento de rotinas leves e modulares em Lua para automação de eventos, controle de estados e lógica de interação, explorando tabelas associativas e integração com aplicações web.
+              </p>
+            </div>
+
+            <div class="project-tech">
+              <span class="tech-tag">Lua</span>
+              <span class="tech-tag">HTML5</span>
+              <span class="tech-tag">CSS3</span>
+              <span class="tech-tag">JavaScript</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         4. FORMAÇÃO ACADÊMICA & TRAJETÓRIA
+         [EDITÁVEL]: Atualize cada <article class="timeline-item"> com o nome
+         exato do seu curso, instituição, períodos e atividades do LinkedIn.
+         ==================================================================== -->
+    <section class="section" id="experiencia">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">03. Trajetória</span>
+          <h2 class="section-title">Formação &amp; Experiência</h2>
+          <p class="section-subtitle">
+            Evolução acadêmica, projetos práticos e desenvolvimento contínuo em engenharia de software.
+          </p>
+        </div>
+
+        <div class="timeline">
+          <!-- ITEM 1: GRADUAÇÃO -->
+          <article class="timeline-item reveal">
+            <span class="timeline-marker" aria-hidden="true"></span>
+            <div class="timeline-header">
+              <h3 class="timeline-role">Bacharelado em Ciência da Computação — 4º Semestre</h3>
+              <span class="timeline-period">Em andamento</span>
+            </div>
+            <p class="timeline-company">Universidade Estácio de Sá (Estácio)</p>
+            <p class="timeline-desc">
+              Formação abrangendo disciplinas fundamentais e aplicadas: <strong>Engenharia de Software, Modelagem de Sistemas em UML, Análise de Dados, Redes de Computadores, Sistemas Operacionais, Desenvolvimento Rápido de Aplicações (RAD) e Computação em Nuvem</strong>, aliadas à prática em Python, C, C#, Lua e SQL.
+            </p>
+          </article>
+
+          <!-- ITEM 2: PROJETOS PRÁTICOS E DESENVOLVIMENTO WEB -->
+          <article class="timeline-item reveal">
+            <span class="timeline-marker" aria-hidden="true"></span>
+            <div class="timeline-header">
+              <h3 class="timeline-role">Projetos Práticos &amp; Desenvolvimento Web</h3>
+              <span class="timeline-period">2024 — Atual</span>
+            </div>
+            <p class="timeline-company">Repositórios Open Source &amp; Prática Laboratorial</p>
+            <p class="timeline-desc">
+              Construção de sistemas e protótipos aplicando documentação UML e metodologias RAD, scripts de análise de dados em Python e SQL, rotinas em C e Lua, além do desenvolvimento de interfaces responsivas com HTML5, CSS3 e JavaScript.
+            </p>
+          </article>
+
+          <!-- ITEM 3: ESPAÇO RESERVADO PARA FUTUROS ESTÁGIOS / EXPERIÊNCIAS (EDITÁVEL) -->
+          <article class="timeline-item reveal">
+            <span class="timeline-marker" aria-hidden="true"></span>
+            <div class="timeline-header">
+              <!-- [EDITÁVEL]: Atualize quando iniciar seu primeiro estágio ou monitoria -->
+              <h3 class="timeline-role">Em Busca da Primeira Oportunidade de Estágio</h3>
+              <span class="timeline-period">Disponibilidade Imediata</span>
+            </div>
+            <p class="timeline-company">Desenvolvimento de Software • Dados • Infraestrutura &amp; Nuvem</p>
+            <p class="timeline-desc">
+              Pronto para atuar em equipes de tecnologia, aplicando raciocínio lógico, boas práticas de Engenharia de Software, modelagem de processos e versionamento com Git/GitHub para gerar entregas consistentes.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ======================================================================
+       5. CONTATO & FOOTER
+       [EDITÁVEL]: Insira seu e-mail profissional real no atributo data-email
+       e no texto do botão abaixo.
+       ====================================================================== -->
+  <footer class="contact-section" id="contato">
+    <div class="container">
+      <div class="contact-box reveal">
+        <div>
+          <span class="section-tag">04. Próximos Passos</span>
+          <h2 class="contact-title">Vamos conversar sobre estágios e projetos?</h2>
+          <p class="contact-text">
+            Busco oportunidades de estágio ou posição júnior onde eu possa contribuir com minha dedicação, aprender com equipes experientes e aplicar meus conhecimentos em Python, C, C#, Lua, SQL e Desenvolvimento Web.
+          </p>
+        </div>
+
+        <div class="contact-links">
+          <a href="https://www.linkedin.com/in/daviiborgges/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+              <rect x="2" y="9" width="4" height="12"></rect>
+              <circle cx="4" cy="4" r="2"></circle>
+            </svg>
+            <span>Conectar no LinkedIn</span>
+          </a>
+
+          <a href="https://github.com/DavidNeox" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg>
+            <span>Explorar GitHub</span>
+          </a>
+
+          <!-- [EDITÁVEL]: Substitua "contato@daviborges.dev" pelo seu e-mail real -->
+          <button type="button" class="email-copy-btn" id="copyEmailBtn" data-email="contato@daviborges.dev" aria-label="Copiar endereço de e-mail">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span id="emailText">contato@daviborges.dev</span>
+            <span class="copy-feedback" id="copyFeedback">Copiado</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; <span id="currentYear"></span> Davi Borges. Todos os direitos reservados.</p>
+        <p>Desenvolvido com foco em performance, clareza e semântica.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======================================================================
+       JAVASCRIPT INLINE (INTERAÇÕES, OBSERVER & NAVEGAÇÃO)
+       ====================================================================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Atualiza o ano automaticamente no rodapé
+      const yearEl = document.getElementById('currentYear');
+      if (yearEl) {
+        yearEl.textContent = new Date().getFullYear();
+      }
+
+      // 2. Efeito de blur e borda na Navbar ao rolar a página
+      const navbar = document.getElementById('navbar');
+      const handleScroll = () => {
+        if (window.scrollY > 24) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      };
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      handleScroll();
+
+      // 3. Menu responsivo mobile
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const navLinks = document.getElementById('navLinks');
+      const navItems = document.querySelectorAll('.nav-link');
+
+      if (mobileMenuBtn && navLinks) {
+        mobileMenuBtn.addEventListener('click', () => {
+          const isOpen = navLinks.classList.toggle('open');
+          mobileMenuBtn.setAttribute('aria-expanded', String(isOpen));
+        });
+
+        // Fecha o menu ao clicar em um link
+        navItems.forEach(link => {
+          link.addEventListener('click', () => {
+            navLinks.classList.remove('open');
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+
+      // 4. Animação suave de entrada (fade-in) com IntersectionObserver
+      const revealElements = document.querySelectorAll('.reveal');
+      const revealObserver = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.12,
+          rootMargin: '0px 0px -40px 0px'
+        }
+      );
+
+      revealElements.forEach((el) => revealObserver.observe(el));
+
+      // 5. Destaque dinâmico do link ativo na navegação conforme a seção visível
+      const sections = document.querySelectorAll('section[id], footer[id]');
+      const sectionObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const id = entry.target.getAttribute('id');
+              navItems.forEach((item) => {
+                item.classList.toggle('active', item.getAttribute('href') === `#${id}`);
+              });
+            }
+          });
+        },
+        {
+          threshold: 0.35
+        }
+      );
+
+      sections.forEach((section) => sectionObserver.observe(section));
+
+      // 6. Botão de copiar e-mail sem dependências externas
+      const copyBtn = document.getElementById('copyEmailBtn');
+      const copyFeedback = document.getElementById('copyFeedback');
+
+      if (copyBtn && copyFeedback) {
+        copyBtn.addEventListener('click', () => {
+          const email = copyBtn.getAttribute('data-email');
+          if (!email) return;
+
+          const tempInput = document.createElement('input');
+          tempInput.value = email;
+          document.body.appendChild(tempInput);
+          tempInput.select();
+          document.execCommand('copy');
+          document.body.removeChild(tempInput);
+
+          copyFeedback.classList.add('visible');
+          setTimeout(() => {
+            copyFeedback.classList.remove('visible');
+          }, 2200);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
